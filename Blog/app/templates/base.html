@@ -1,51 +1,32 @@
-<html>
-  <head>
-    {% if title %}
-    <title>Hugo's - {{ title }}</title>
-    {% else %}
-    <title>Hugo's</title>
-    {% endif %}
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
-</head>
-<body>
-<header class="header">
-  <ul>
-    <li class="cor-1"></li>
-    <li class="cor-2"></li>
-    <li class="cor-3"></li>
-    <li class="cor-4"></li>
-    <li class="cor-5"></li>
-  </ul>
-  </header>
-<div class="wrap">
+{% extends "bootstrap/base.html" %}
 
+{% block title %}Flasky{% endblock %}
 
-<nav class="menu">
-  <ul>
-    <li>
-      <a href="#">Home</a>
-    </li>
-    <li>
-      <a href="#">Archive</a>
-    </li>
-    <li>
-      <a href="#">About me</a>
-    </li>
-  </ul>
-  </nav>
-    <aside class="sidebar">
-      <div class="widget">
-      <h2>Michael</h2>
-      <p>Hello, my name’s <b>Hugo</b>. I’m 22 years old. I live in <b>GuangDong (China)</b>. I am a <b>Pythoner</b>.<br> Contact Me:<br><b href="#">hugooood@outlook.com</b></p>
-      </div>
-      <div class="widget">
-      <h2>Title</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-      </div>
-
-  </aside>
-    {% block content %}{% endblock %}
+{% block navbar %}
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle"
+            data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">博客</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">资料</a></li>
+                <li><a href="#">关于</a></li>
+            </ul>
+        </div>
+    </div>
 </div>
-</body>
-</html>
+{% endblock %}
+{% block content %}
+<div class="container">
+    {% block page_content %}{% endblock %}
+</div>
+{% endblock %}
