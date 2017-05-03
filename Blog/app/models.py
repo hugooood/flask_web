@@ -36,8 +36,8 @@ class User(db.Model):
 class Article(db.Model):
     __tablename__ = 'article'
     id = db.Column(db.Integer, primary_key = True)
-    title = db.Column(db.String(64))
-    tags = db.Column(db.String(64))
+    title = db.Column(db.String(64)) #标题
+    tags = db.Column(db.String(64)) #标签
     categories = db.Column(db.String(64))
     content = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime)
