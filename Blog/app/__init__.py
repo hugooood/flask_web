@@ -3,11 +3,19 @@
 from flask import Flask,render_template
 from flask.ext.bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
+#from flask_login import LoginManager
 from config import config
 
+# 延迟创建app
 bootstrap = Bootstrap()
 db = SQLAlchemy()
+#loginManager = LoginManager()
 
+#loginManager.session_protection = "None"
+#可以设置None,'basic','strong'  以提供不同的安全等级,一般设置strong,如果发现异常会登出用户
+
+# loginManager.login_view = "login"
+# #这里填写你的登陆界面的路由
 
 def create_app(config_name):
     app = Flask(__name__)
@@ -16,7 +24,10 @@ def create_app(config_name):
 
     bootstrap.init_app(app)
     db.init_app(app)
+    #loginManager.init_app(app)
 
+
+    
     #附加路由和自定义的错误页面
 
     #注册蓝本
