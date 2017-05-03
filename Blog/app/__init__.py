@@ -5,10 +5,24 @@ from flask.ext.bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
 #from flask_login import LoginManager
 from config import config
+from flask_admin import Admin,BaseView,expose,AdminIndexView
 
 # 延迟创建app
 bootstrap = Bootstrap()
 db = SQLAlchemy()
+admin = Admin(
+        name='不准看',
+        template_mode='bootstrap3',
+        url='/',
+
+        index_view=AdminIndexView(
+        name='home',
+        #template='welcome.html',
+        url='/hello_admin'
+        )
+)
+
+
 #loginManager = LoginManager()
 
 #loginManager.session_protection = "None"
@@ -24,6 +38,8 @@ def create_app(config_name):
 
     bootstrap.init_app(app)
     db.init_app(app)
+    admin.init_app(app)
+
     #loginManager.init_app(app)
 
 
