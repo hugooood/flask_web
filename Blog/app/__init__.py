@@ -3,7 +3,7 @@
 from flask import Flask,render_template
 from flask.ext.bootstrap import Bootstrap
 from flask_sqlalchemy import SQLAlchemy
-#from flask_login import LoginManager
+from flask_login import LoginManager
 from config import config
 from flask_admin import Admin,BaseView,expose,AdminIndexView
 
@@ -23,12 +23,12 @@ admin = Admin(
 )
 
 
-#loginManager = LoginManager()
+login_manager = LoginManager()
 
-#loginManager.session_protection = "None"
 #可以设置None,'basic','strong'  以提供不同的安全等级,一般设置strong,如果发现异常会登出用户
+login_manager.session_protection = "strong"
 
-# loginManager.login_view = "login"
+login_manager.login_view = "auth.login" #auth是对应的蓝本名
 # #这里填写你的登陆界面的路由
 
 def create_app(config_name):
@@ -39,8 +39,7 @@ def create_app(config_name):
     bootstrap.init_app(app)
     db.init_app(app)
     admin.init_app(app)
-
-    #loginManager.init_app(app)
+    login_manager.init_app(app)
 
 
     
@@ -49,6 +48,9 @@ def create_app(config_name):
     #注册蓝本
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
+
+    from .auth import auth as auth_blueprint
+    app.register_blueprint(auth_blueprint,url_prefix='/auth')
 
     return app
 # app = Flask(__name__)
